@@ -1,0 +1,53 @@
+storage:
+  device: /dev/sda # [/dev/sda, /dev/nvme1]
+  scheme: MBR # [MBR, GPT, GPT+UEFI]
+
+  install:
+    - mount: /boot
+      size: 256M
+      filesystem: ext2
+
+    - mount: /swap
+      size: 512M
+      filesystem: swap
+
+    - mount: /
+      size: auto
+      filesystem: ext4
+
+  volumes:
+    - mount: /tmp
+      device: tmpfs
+      filesystem: tmpfs
+      opts: noatime,nodiratime,nodev,nosuid,size=1G
+
+install:
+    root_mount: /mnt/gentoo
+    init_system: OpenRC # [OpenRC, systemd]
+    time_zone: Europe/Moscow # ls -lash /usr/share/zoneinfo
+    locale:
+      - en_US.UTF-8 UTF-8
+      - ru_RU.UTF-8 UTF-8
+
+user:
+    login: user
+    password: 123
+    root_password: 123
+
+packages:
+  - net-analyzer/iftop
+  - sys-process/iotop
+  - sys-process/htop
+  - app-text/tree
+  - net-analyzer/nmap
+  - net-analyzer/traceroute
+  - net-analyzer/tcptraceroute
+  - net-misc/wget
+  - sys-apps/lm_sensors
+  - net-misc/ntp
+  - app-arch/zstd
+  - app-arch/p7zip
+  - app-misc/mc
+  - media-video/mpv
+  - media-video/mediainfo
+  - net-print/cups
