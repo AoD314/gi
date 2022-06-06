@@ -1,0 +1,2 @@
+# gi
+gentoo installer
